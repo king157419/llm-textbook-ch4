@@ -1,0 +1,27 @@
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[fig, x=1mm, y=1mm]
+  \node[blkw, minimum width=96mm, minimum height=9mm] (ui) at (0,0) {{\bfseries 接口层}\quad 网页 · 移动端 · 开放 API};
+  \node[blka, minimum width=96mm, minimum height=11mm] (orch) at (0,-17) {{\bfseries 编排层}\\[-1pt]\footnotesize 工作流 / 智能体 · 提示词组织 · 权限校验 · 安全审查 · 日志};
+  \node[blk, minimum width=46mm, minimum height=11mm] (know) at (-25,-36) {{\bfseries 知识层}\\[-1pt]\footnotesize 向量数据库 · 搜索 · 文档库};
+  \node[blk, minimum width=46mm, minimum height=11mm] (model) at (25,-36) {{\bfseries 模型服务层}\\[-1pt]\footnotesize 推理引擎 · 模型 API};
+  \node[blk, minimum width=96mm, minimum height=9mm, fill=white] (infra) at (0,-54) {{\bfseries 基础设施层}\quad 计算芯片 · 存储 · 互联 · 软件栈};
+  \draw[<->, line width=0.6pt] (ui.south) -- (orch.north);
+  \draw[<->, line width=0.6pt] (orch.south -| know.north) -- (know.north) node[midway, right, note, font=\figfont\scriptsize] {检索资料};
+  \draw[<->, line width=0.6pt] (orch.south -| model.north) -- (model.north) node[midway, right, note, font=\figfont\scriptsize] {生成回答};
+  \draw[->, line width=0.6pt] (know.south) -- (know.south |- infra.north);
+  \draw[->, line width=0.6pt] (model.south) -- (model.south |- infra.north);
+  % 微调（离线）
+  \node[blkw, draw=rulegray, minimum width=22mm, minimum height=9mm, font=\figfont\footnotesize] (ft) at (66,-36) {微调（离线）};
+  \draw[->, dashed, line width=0.6pt] (ft.west) -- (model.east) node[midway, above, note, font=\figfont\scriptsize] {权重};
+  % 右侧：工具类别
+  \foreach \n/\t in {orch/{编排平台\\应用开发框架}, infra/{第 4.2 节}} {
+    \node[note, anchor=west, font=\figfont\scriptsize, text width=22mm, align=left] at ([xshift=4mm]\n.east) {\t};
+  }
+  \node[note, anchor=north, font=\figfont\scriptsize] at (know.south) [yshift=-1mm, xshift=-14mm] {向量数据库};
+  \node[note, anchor=north, font=\figfont\scriptsize] at (model.south) [yshift=-1mm, xshift=14mm] {部署工具};
+  \node[note, anchor=north, font=\figfont\scriptsize] at (ft.south) [yshift=-1mm] {微调工具};
+\end{tikzpicture}
+\caption{大模型应用的典型分层与五类工具的位置。编排层居中调度：检索资料和调用模型都是它发起的调用；微调在线下进行，产出的权重交给模型服务层加载}
+\label{fig:app-arch}
+\end{figure}

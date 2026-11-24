@@ -1,0 +1,32 @@
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[fig, x=1mm, y=1mm]
+  \tikzset{chip/.style={draw=accent, fill=white, text=accent, rounded corners=1pt, inner sep=1.2pt,
+                        font=\figfont\scriptsize, anchor=south east}}
+  % 全部层宽 104 mm，以 x=0 为中心；工具类别以“标签”贴在所属层的右上角
+  \node[blkw, minimum width=104mm, minimum height=9mm] (ui) at (0,0) {{\bfseries 接口层}\quad 网页 · 移动端 · 开放 API};
+  \node[blka, minimum width=104mm, minimum height=11mm] (orch) at (0,-19) {{\bfseries 编排层}\\[-1pt]\footnotesize 工作流 / 智能体 · 提示词组织 · 权限校验 · 安全审查 · 日志};
+  \node[blk, minimum width=36mm, minimum height=11mm] (know) at (-34,-40) {{\bfseries 知识层}\\[-1pt]\footnotesize 向量数据库 · 搜索 · 文档库};
+  \node[blk, minimum width=36mm, minimum height=11mm] (model) at (6,-40) {{\bfseries 模型服务层}\\[-1pt]\footnotesize 推理引擎 · 模型 API};
+  \node[blkw, dashed, minimum width=22mm, minimum height=11mm] (ft) at (41,-40) {{\bfseries 微调}\\[-1pt]\footnotesize 离线进行};
+  \node[blkw, minimum width=104mm, minimum height=9mm] (infra) at (0,-59) {{\bfseries 基础设施层}\quad 计算芯片 · 存储 · 互联 · 软件栈};
+  % 调用关系
+  \draw[<->, line width=0.6pt] (ui.south) -- (orch.north);
+  \draw[<->, line width=0.6pt] (orch.south -| know.north) -- (know.north) node[midway, right, note, font=\figfont\scriptsize] {检索资料};
+  \draw[<->, line width=0.6pt] (orch.south -| model.north) -- (model.north) node[midway, right, note, font=\figfont\scriptsize] {生成回答};
+  \draw[->, dashed, line width=0.6pt] (ft.west) -- (model.east) node[midway, above, note, font=\figfont\scriptsize] {权重};
+  \draw[->, line width=0.6pt] (know.south) -- (know.south |- infra.north);
+  \draw[->, line width=0.6pt] (model.south) -- (model.south |- infra.north);
+  % 工具类别标签
+  \node[chip] at ([xshift=-1.5mm]orch.north east) {编排平台 · 应用开发框架};
+  \node[chip] at ([xshift=-1.5mm]know.north east) {向量数据库};
+  \node[chip, anchor=north east] at ([xshift=-1.5mm]model.south east) {部署工具};
+  \node[chip] at ([xshift=-1.5mm]ft.north east) {微调工具};
+  \node[chip, draw=rulegray, text=rulegray] at ([xshift=-1.5mm]infra.north east) {见第 4.2 节};
+  % 居中图例
+  \node[chip, anchor=center] at (-20,-69) {标签};
+  \node[note, anchor=west, font=\figfont\scriptsize] at (-16,-69) {五类工具各自所处的层};
+\end{tikzpicture}
+\caption{（修改稿）大模型应用的典型分层与五类工具的位置。编排层居中调度：检索资料和调用模型都是它发起的调用；微调在线下进行，产出的权重交给模型服务层加载}
+\label{fig:s-app}
+\end{figure}

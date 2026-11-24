@@ -1,0 +1,54 @@
+\documentclass[UTF8,fontset=none,zihao=5,twoside,openany]{ctexbook}
+\usepackage{bookstyle}
+\usepackage{float}
+% 样张中让所有图固定在原位，便于前后对照
+\let\oldfigure\figure \let\endoldfigure\endfigure
+\renewenvironment{figure}[1][]{\oldfigure[H]}{\endoldfigure}
+\setcounter{chapter}{4}
+\pagestyle{plain}
+\begin{document}
+
+\section*{样图 1：图 4-9 预填充与解码}
+\textbf{问题：}“KV 缓存”标注贴在长条左端；右侧红色注释外挂，使整幅图比正文栏偏左约 6 mm。\\
+\textbf{改法：}整幅图以正文栏中线为轴对称排布；“KV 缓存”标注居中并说明其增长方式；“计算受限 / 访存受限”并入下方括号；外挂注释改为底部居中的图例；首个 token 改由预填充产生，与 TTFT 的定义一致。
+
+\noindent\textbf{修改前}
+\input{figs/fig-prefill}
+\Needspace{80mm}\noindent\textbf{修改后}
+\input{samples/s1-prefill}
+
+\clearpage
+\section*{样图 2：图 4-12 综合案例的设计流程}
+\textbf{问题：}主流程靠左，取值文字外挂在右侧且不对齐，底部说明偏左，整体重心偏移。\\
+\textbf{改法：}改成左右两栏的对照表结构（设计环节 / 本案例中的取值），加栏头；取值放进细边框卡片并与环节逐行对齐；图例居中。
+
+\noindent\textbf{修改前}
+\input{figs/fig-case}
+\Needspace{80mm}\noindent\textbf{修改后}
+\input{samples/s2-case}
+
+\clearpage
+\section*{样图 3：图 4-11 应用分层与五类工具}
+\textbf{问题：}右侧散落的工具名与左侧图形不对称，“向量数据库”“部署工具”漂浮在箭头旁，读者难以对应。\\
+\textbf{改法：}微调并入同一行，全图等宽居中；五类工具改为贴在所属层右上角的“标签”，与层一一对应，不再外挂。
+
+\noindent\textbf{修改前}
+\input{figs/fig-app}
+\Needspace{80mm}\noindent\textbf{修改后}
+\input{samples/s3-app}
+
+\IfFileExists{figs/ai/prefill_decode.png}{%
+\clearpage
+\section*{样图 4：AI 生成插图（GPT Image，经 Codex）}
+同一主题用图像生成模型绘制，仅供与 TikZ 版本比较风格与文字可读性。
+\begin{figure}[H]\centering
+\includegraphics[width=\linewidth]{figs/ai/prefill_decode.png}
+\caption{（AI 生成）预填充与解码}
+\end{figure}
+\IfFileExists{figs/ai/request_journey.png}{%
+\begin{figure}[H]\centering
+\includegraphics[width=\linewidth]{figs/ai/request_journey.png}
+\caption{（AI 生成）一次大模型请求的旅程}
+\end{figure}}{}}{}
+
+\end{document}

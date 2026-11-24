@@ -1,0 +1,38 @@
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[fig, x=1mm, y=1mm]
+  \tikzset{tok/.style={draw=figline, fill=white, minimum size=4.2mm, inner sep=0pt, font=\figfont\scriptsize},
+           newtok/.style={draw=accent, fill=accentpale, minimum size=4.2mm, inner sep=0pt, font=\figfont\scriptsize}}
+  % 预填充
+  \node[blk, minimum width=34mm, minimum height=9mm] (pf) at (-42,0) {预填充\\[-1pt]\footnotesize 并行处理全部输入};
+  \foreach \i in {1,...,6} {
+    \node[tok] (x\i) at (-57.5+\i*4.9,14) {$x_{\i}$};
+    \draw[->, line width=0.4pt] (x\i.south) -- (x\i.south |- pf.north);
+  }
+  \node[note, anchor=south] at (-42,17) {输入提示（$T$ 个 token）};
+  % 解码步骤
+  \foreach \k in {1,...,5} {
+    \pgfmathsetmacro{\xx}{-18+(\k-1)*12}
+    \node[blk, minimum width=9mm, minimum height=9mm, inner sep=1pt, font=\figfont\scriptsize] (dc\k) at (\xx,0) {解码};
+    \node[newtok] (y\k) at (\xx,14) {$y_{\k}$};
+    \draw[->, line width=0.4pt] (dc\k.north) -- (y\k.south);
+  }
+  \draw[->, line width=0.4pt] (pf.east) -- (dc1.west);
+  \foreach \k [evaluate=\k as \n using int(\k+1)] in {1,...,4} \draw[->, line width=0.4pt] (dc\k.east) -- (dc\n.west);
+  \node[note, anchor=south] at (6,17) {逐个生成输出 token};
+  \node[font=\figfont\small] at (47,0) {$\cdots$};
+  % KV 缓存
+  \node[blkw, minimum width=104mm, minimum height=7mm, anchor=west] (kv) at (-59,-17) {};
+  \node[font=\figfont\footnotesize, anchor=west] at (kv.west) {\ KV 缓存};
+  \draw[->, accent, line width=0.7pt] (pf.south) -- (pf.south |- kv.north) node[midway, left, note, font=\figfont\scriptsize, text=accent] {写入};
+  \foreach \k in {1,...,5} \draw[<->, warn, line width=0.7pt] (dc\k.south) -- (dc\k.south |- kv.north);
+  \node[note, anchor=west, font=\figfont\scriptsize, text=warn] at (47,-9) {每步读取全部\\权重与缓存};
+  % 时间轴
+  \draw[->, line width=0.5pt, rulegray] (-60,-27) -- (52,-27) node[right, note, text=ink] {时间};
+  \draw[decorate, decoration={brace, mirror, amplitude=3pt}, line width=0.6pt] (-59,-29) -- (-24,-29) node[midway, below=3pt, note] {TTFT：首 token 延迟};
+  \draw[decorate, decoration={brace, mirror, amplitude=3pt}, line width=0.6pt] (-12.5,-29) -- (-1.5,-29) node[midway, below=3pt, note] {TPOT};
+  \node[note, anchor=north west] at (5,-30) {预填充：计算受限\quad 解码：访存受限};
+\end{tikzpicture}
+\caption{一次推理请求的两个阶段。预填充并行处理全部输入并写入 KV 缓存；解码每步只生成一个 token，却要读取全部权重与已有缓存}
+\label{fig:prefill}
+\end{figure}

@@ -1,0 +1,593 @@
+{
+ "fig-roofline": {
+  "width_mm": 125.1,
+  "center_offset_mm": -1.0,
+  "sizes_pt": {
+   "9.0": 13,
+   "7.5": 19,
+   "5.2": 3
+  },
+  "fonts": {
+   "TeXGyreTermes-Regular": 24,
+   "SimSun": 11
+  },
+  "bold_text": [],
+  "text_colours": {
+   "#1A1A1A": 29,
+   "#B23A2E": 4,
+   "#2E7D78": 2
+  },
+  "audit_figure_collisions.py": {
+   "exit": 0,
+   "out": [
+    "Nature Figure Rendered Collision Audit",
+    "pdf: D:\\desk\\llm\\ch4\\tools\\nature\\figs\\fig-roofline.pdf",
+    "pages: 1",
+    "visible text boxes: 17",
+    "stroke paths: 10",
+    "",
+    "",
+    "summary: 0 fail, 0 warn, 0 contained fill overlays, 0 contained image overlays",
+    "verdict: PASS",
+    "note: contained overlays can be intentional; WARN findings need final-size visual review"
+   ]
+  },
+  "audit_pdf_text.py": {
+   "exit": 0,
+   "out": [
+    "Nature Figure PDF Text Audit",
+    "pdf: D:\\desk\\llm\\ch4\\tools\\nature\\figs\\fig-roofline.pdf",
+    "minimum required: 5 pt",
+    "minimum found: 5.2304 pt",
+    "text runs: 27",
+    "below minimum: 0",
+    "verdict: PASS",
+    "note: content-stream scanning does not replace final-size visual inspection or account for every PDF transform (e.g. Form XObject matrices)"
+   ]
+  }
+ },
+ "fig-overview": {
+  "width_mm": 136.9,
+  "center_offset_mm": -0.9,
+  "sizes_pt": {
+   "9.0": 7,
+   "7.5": 48
+  },
+  "fonts": {
+   "SimHei": 6,
+   "SimSun": 31,
+   "TeXGyreTermes-Regular": 18
+  },
+  "bold_text": [],
+  "text_colours": {
+   "#1A1A1A": 55
+  },
+  "audit_figure_collisions.py": {
+   "exit": 1,
+   "out": [
+    "Nature Figure Rendered Collision Audit",
+    "pdf: D:\\desk\\llm\\ch4\\tools\\nature\\figs\\fig-overview.pdf",
+    "pages: 1",
+    "visible text boxes: 31",
+    "stroke paths: 20",
+    "",
+    "[FAIL] page 1 text-text: Text boxes overlap by 100.0% of the smaller box — '算得快'",
+    "  other text: '存得下'",
+    "  text bbox: (31.888015747070312, 214.74102783203125, 54.30401611328125, 242.1390380859375)",
+    "[FAIL] page 1 text-text: Text boxes overlap by 100.0% of the smaller box — '算得快'",
+    "  other text: '传得动'",
+    "  text bbox: (31.888015747070312, 214.74102783203125, 54.30401611328125, 242.1390380859375)",
+    "",
+    "summary: 2 fail, 0 warn, 12 contained fill overlays, 0 contained image overlays",
+    "verdict: FIX BEFORE DELIVERY",
+    "note: contained overlays can be intentional; WARN findings need final-size visual review"
+   ]
+  },
+  "audit_pdf_text.py": {
+   "exit": 0,
+   "out": [
+    "Nature Figure PDF Text Audit",
+    "pdf: D:\\desk\\llm\\ch4\\tools\\nature\\figs\\fig-overview.pdf",
+    "minimum required: 5 pt",
+    "minimum found: 7.472 pt",
+    "text runs: 44",
+    "below minimum: 0",
+    "verdict: PASS",
+    "note: content-stream scanning does not replace final-size visual inspection or account for every PDF transform (e.g. Form XObject matrices)"
+   ]
+  }
+ },
+ "fig-chips": {
+  "width_mm": 130.0,
+  "center_offset_mm": -0.9,
+  "sizes_pt": {
+   "7.5": 10,
+   "9.0": 3
+  },
+  "fonts": {
+   "SimSun": 10,
+   "TeXGyreTermes-Regular": 3
+  },
+  "bold_text": [],
+  "text_colours": {
+   "#1A1A1A": 13
+  },
+  "audit_figure_collisions.py": {
+   "exit": 0,
+   "out": [
+    "Nature Figure Rendered Collision Audit",
+    "pdf: D:\\desk\\llm\\ch4\\tools\\nature\\figs\\fig-chips.pdf",
+    "pages: 1",
+    "visible text boxes: 13",
+    "stroke paths: 108",
+    "",
+    "",
+    "summary: 0 fail, 0 warn, 10 contained fill overlays, 0 contained image overlays",
+    "verdict: PASS",
+    "note: contained overlays can be intentional; WARN findings need final-size visual review"
+   ]
+  },
+  "audit_pdf_text.py": {
+   "exit": 0,
+   "out": [
+    "Nature Figure PDF Text Audit",
+    "pdf: D:\\desk\\llm\\ch4\\tools\\nature\\figs\\fig-chips.pdf",
+    "minimum required: 5 pt",
+    "minimum found: 7.472 pt",
+    "text runs: 7",
+    "below minimum: 0",
+    "verdict: PASS",
+    "note: content-stream scanning does not replace final-size visual inspection or account for every PDF transform (e.g. Form XObject matrices)"
+   ]
+  }
+ },
+ "fig-memory": {
+  "width_mm": 136.6,
+  "center_offset_mm": -0.0,
+  "sizes_pt": {
+   "9.0": 8,
+   "7.5": 30
+  },
+  "fonts": {
+   "SimSun": 19,
+   "TeXGyreTermes-Regular": 15,
+   "SimHei": 3,
+   "TeXGyreTermes-Bold": 1
+  },
+  "bold_text": [
+   "GPU"
+  ],
+  "text_colours": {
+   "#1A1A1A": 38
+  },
+  "audit_figure_collisions.py": {
+   "exit": 1,
+   "out": [
+    "Nature Figure Rendered Collision Audit",
+    "pdf: D:\\desk\\llm\\ch4\\tools\\nature\\figs\\fig-memory.pdf",
+    "pages: 1",
+    "visible text boxes: 16",
+    "stroke paths: 11",
+    "",
+    "[FAIL] page 1 text-text: Text boxes overlap by 100.0% of the smaller box — '更快'",
+    "  other text: '更小'",
+    "  text bbox: (2.0, 54.399017333984375, 19.574142456054688, 81.7970199584961)",
+    "[FAIL] page 1 text-text: Text boxes overlap by 100.0% of the smaller box — '更快'",
+    "  other text: '更贵'",
+    "  text bbox: (2.0, 54.399017333984375, 19.574142456054688, 81.7970199584961)",
+    "",
+    "summary: 2 fail, 0 warn, 4 contained fill overlays, 0 contained image overlays",
+    "verdict: FIX BEFORE DELIVERY",
+    "note: contained overlays can be intentional; WARN findings need final-size visual review"
+   ]
+  },
+  "audit_pdf_text.py": {
+   "exit": 0,
+   "out": [
+    "Nature Figure PDF Text Audit",
+    "pdf: D:\\desk\\llm\\ch4\\tools\\nature\\figs\\fig-memory.pdf",
+    "minimum required: 5 pt",
+    "minimum found: 7.472 pt",
+    "text runs: 31",
+    "below minimum: 0",
+    "verdict: PASS",
+    "note: content-stream scanning does not replace final-size visual inspection or account for every PDF transform (e.g. Form XObject matrices)"
+   ]
+  }
+ },
+ "fig-interconnect": {
+  "width_mm": 134.0,
+  "center_offset_mm": -0.9,
+  "sizes_pt": {
+   "7.5": 36
+  },
+  "fonts": {
+   "SimHei": 2,
+   "TeXGyreTermes-Bold": 2,
+   "TeXGyreTermes-Regular": 23,
+   "SimSun": 9
+  },
+  "bold_text": [
+   "A",
+   "B"
+  ],
+  "text_colours": {
+   "#1A1A1A": 36
+  },
+  "audit_figure_collisions.py": {
+   "exit": 0,
+   "out": [
+    "Nature Figure Rendered Collision Audit",
+    "pdf: D:\\desk\\llm\\ch4\\tools\\nature\\figs\\fig-interconnect.pdf",
+    "pages: 1",
+    "visible text boxes: 22",
+    "stroke paths: 45",
+    "",
+    "",
+    "summary: 0 fail, 0 warn, 15 contained fill overlays, 0 contained image overlays",
+    "verdict: PASS",
+    "note: contained overlays can be intentional; WARN findings need final-size visual review"
+   ]
+  },
+  "audit_pdf_text.py": {
+   "exit": 0,
+   "out": [
+    "Nature Figure PDF Text Audit",
+    "pdf: D:\\desk\\llm\\ch4\\tools\\nature\\figs\\fig-interconnect.pdf",
+    "minimum required: 5 pt",
+    "minimum found: 7.472 pt",
+    "text runs: 22",
+    "below minimum: 0",
+    "verdict: PASS",
+    "note: content-stream scanning does not replace final-size visual inspection or account for every PDF transform (e.g. Form XObject matrices)"
+   ]
+  }
+ },
+ "fig-stack": {
+  "width_mm": 132.0,
+  "center_offset_mm": -0.6,
+  "sizes_pt": {
+   "7.5": 40
+  },
+  "fonts": {
+   "TeXGyreTermes-Bold": 3,
+   "SimHei": 2,
+   "SimSun": 18,
+   "TeXGyreTermes-Regular": 17
+  },
+  "bold_text": [
+   "MLU",
+   "NPU",
+   "NVIDIA GPU"
+  ],
+  "text_colours": {
+   "#1A1A1A": 40
+  },
+  "audit_figure_collisions.py": {
+   "exit": 1,
+   "out": [
+    "Nature Figure Rendered Collision Audit",
+    "pdf: D:\\desk\\llm\\ch4\\tools\\nature\\figs\\fig-stack.pdf",
+    "pages: 1",
+    "visible text boxes: 29",
+    "stroke paths: 19",
+    "",
+    "[FAIL] page 1 text-text: Text boxes overlap by 100.0% of the smaller box — '调'",
+    "  other text: '用'",
+    "  text bbox: (2.0, 56.474998474121094, 9.472000122070312, 93.83399200439453)",
+    "[FAIL] page 1 text-text: Text boxes overlap by 100.0% of the smaller box — '调'",
+    "  other text: '方'",
+    "  text bbox: (2.0, 56.474998474121094, 9.472000122070312, 93.83399200439453)",
+    "[FAIL] page 1 text-text: Text boxes overlap by 100.0% of the smaller box — '调'",
+    "  other text: '向'",
+    "  text bbox: (2.0, 56.474998474121094, 9.472000122070312, 93.83399200439453)",
+    "[FAIL] page 1 text-text: Text boxes overlap by 100.0% of the smaller box — '计算'",
+    "  other text: '软件栈'",
+    "  text bbox: (353.6919860839844, 70.6500015258789, 376.1090087890625, 88.08499908447266)",
+    "",
+    "summary: 4 fail, 0 warn, 15 contained fill overlays, 0 contained image overlays",
+    "verdict: FIX BEFORE DELIVERY",
+    "note: contained overlays can be intentional; WARN findings need final-size visual review"
+   ]
+  },
+  "audit_pdf_text.py": {
+   "exit": 0,
+   "out": [
+    "Nature Figure PDF Text Audit",
+    "pdf: D:\\desk\\llm\\ch4\\tools\\nature\\figs\\fig-stack.pdf",
+    "minimum required: 5 pt",
+    "minimum found: 7.472 pt",
+    "text runs: 28",
+    "below minimum: 0",
+    "verdict: PASS",
+    "note: content-stream scanning does not replace final-size visual inspection or account for every PDF transform (e.g. Form XObject matrices)"
+   ]
+  }
+ },
+ "fig-parallel": {
+  "width_mm": 138.0,
+  "center_offset_mm": -0.9,
+  "sizes_pt": {
+   "7.5": 66
+  },
+  "fonts": {
+   "TeXGyreTermes-Regular": 32,
+   "SimSun": 34
+  },
+  "bold_text": [],
+  "text_colours": {
+   "#1A1A1A": 62,
+   "#2E7D78": 3,
+   "#B23A2E": 1
+  },
+  "audit_figure_collisions.py": {
+   "exit": 0,
+   "out": [
+    "Nature Figure Rendered Collision Audit",
+    "pdf: D:\\desk\\llm\\ch4\\tools\\nature\\figs\\fig-parallel.pdf",
+    "pages: 1",
+    "visible text boxes: 36",
+    "stroke paths: 48",
+    "",
+    "",
+    "summary: 0 fail, 0 warn, 24 contained fill overlays, 0 contained image overlays",
+    "verdict: PASS",
+    "note: contained overlays can be intentional; WARN findings need final-size visual review"
+   ]
+  },
+  "audit_pdf_text.py": {
+   "exit": 0,
+   "out": [
+    "Nature Figure PDF Text Audit",
+    "pdf: D:\\desk\\llm\\ch4\\tools\\nature\\figs\\fig-parallel.pdf",
+    "minimum required: 5 pt",
+    "minimum found: 7.472 pt",
+    "text runs: 40",
+    "below minimum: 0",
+    "verdict: PASS",
+    "note: content-stream scanning does not replace final-size visual inspection or account for every PDF transform (e.g. Form XObject matrices)"
+   ]
+  }
+ },
+ "fig-zero": {
+  "width_mm": 115.4,
+  "center_offset_mm": -0.3,
+  "sizes_pt": {
+   "9.0": 15,
+   "7.5": 15
+  },
+  "fonts": {
+   "TeXGyreTermes-Regular": 20,
+   "SimSun": 10
+  },
+  "bold_text": [],
+  "text_colours": {
+   "#1A1A1A": 28,
+   "#B23A2E": 2
+  },
+  "audit_figure_collisions.py": {
+   "exit": 0,
+   "out": [
+    "Nature Figure Rendered Collision Audit",
+    "pdf: D:\\desk\\llm\\ch4\\tools\\nature\\figs\\fig-zero.pdf",
+    "pages: 1",
+    "visible text boxes: 20",
+    "stroke paths: 11",
+    "",
+    "",
+    "summary: 0 fail, 0 warn, 3 contained fill overlays, 0 contained image overlays",
+    "verdict: PASS",
+    "note: contained overlays can be intentional; WARN findings need final-size visual review"
+   ]
+  },
+  "audit_pdf_text.py": {
+   "exit": 0,
+   "out": [
+    "Nature Figure PDF Text Audit",
+    "pdf: D:\\desk\\llm\\ch4\\tools\\nature\\figs\\fig-zero.pdf",
+    "minimum required: 5 pt",
+    "minimum found: 7.472 pt",
+    "text runs: 16",
+    "below minimum: 0",
+    "verdict: PASS",
+    "note: content-stream scanning does not replace final-size visual inspection or account for every PDF transform (e.g. Form XObject matrices)"
+   ]
+  }
+ },
+ "fig-prefill": {
+  "width_mm": 118.6,
+  "center_offset_mm": -1.5,
+  "sizes_pt": {
+   "9.0": 4,
+   "7.5": 35,
+   "5.2": 11
+  },
+  "fonts": {
+   "SimSun": 20,
+   "TeXGyreTermes-Regular": 30
+  },
+  "bold_text": [],
+  "text_colours": {
+   "#1A1A1A": 50
+  },
+  "audit_figure_collisions.py": {
+   "exit": 1,
+   "out": [
+    "Nature Figure Rendered Collision Audit",
+    "pdf: D:\\desk\\llm\\ch4\\tools\\nature\\figs\\fig-prefill.pdf",
+    "pages: 1",
+    "visible text boxes: 29",
+    "stroke paths: 77",
+    "",
+    "[FAIL] page 1 text-text: Text boxes overlap by 100.0% of the smaller box — 'TTFT：首token 延迟'",
+    "  other text: '（计算受限）'",
+    "  text bbox: (21.894500732421875, 145.5860137939453, 89.82249450683594, 162.02401733398438)",
+    "",
+    "summary: 1 fail, 0 warn, 19 contained fill overlays, 0 contained image overlays",
+    "verdict: FIX BEFORE DELIVERY",
+    "note: contained overlays can be intentional; WARN findings need final-size visual review"
+   ]
+  },
+  "audit_pdf_text.py": {
+   "exit": 0,
+   "out": [
+    "Nature Figure PDF Text Audit",
+    "pdf: D:\\desk\\llm\\ch4\\tools\\nature\\figs\\fig-prefill.pdf",
+    "minimum required: 5 pt",
+    "minimum found: 5.2304 pt",
+    "text runs: 47",
+    "below minimum: 0",
+    "verdict: PASS",
+    "note: content-stream scanning does not replace final-size visual inspection or account for every PDF transform (e.g. Form XObject matrices)"
+   ]
+  }
+ },
+ "fig-kv": {
+  "width_mm": 110.2,
+  "center_offset_mm": -1.0,
+  "sizes_pt": {
+   "9.0": 16,
+   "7.5": 5
+  },
+  "fonts": {
+   "TeXGyreTermes-Regular": 18,
+   "SimSun": 3
+  },
+  "bold_text": [],
+  "text_colours": {
+   "#1A1A1A": 18,
+   "#B23A2E": 2,
+   "#2E7D78": 1
+  },
+  "audit_figure_collisions.py": {
+   "exit": 0,
+   "out": [
+    "Nature Figure Rendered Collision Audit",
+    "pdf: D:\\desk\\llm\\ch4\\tools\\nature\\figs\\fig-kv.pdf",
+    "pages: 1",
+    "visible text boxes: 17",
+    "stroke paths: 8",
+    "",
+    "",
+    "summary: 0 fail, 0 warn, 0 contained fill overlays, 0 contained image overlays",
+    "verdict: PASS",
+    "note: contained overlays can be intentional; WARN findings need final-size visual review"
+   ]
+  },
+  "audit_pdf_text.py": {
+   "exit": 0,
+   "out": [
+    "Nature Figure PDF Text Audit",
+    "pdf: D:\\desk\\llm\\ch4\\tools\\nature\\figs\\fig-kv.pdf",
+    "minimum required: 5 pt",
+    "minimum found: 7.472 pt",
+    "text runs: 7",
+    "below minimum: 0",
+    "verdict: PASS",
+    "note: content-stream scanning does not replace final-size visual inspection or account for every PDF transform (e.g. Form XObject matrices)"
+   ]
+  }
+ },
+ "fig-app": {
+  "width_mm": 110.0,
+  "center_offset_mm": -0.9,
+  "sizes_pt": {
+   "9.0": 6,
+   "7.5": 16
+  },
+  "fonts": {
+   "SimHei": 6,
+   "SimSun": 13,
+   "TeXGyreTermes-Regular": 3
+  },
+  "bold_text": [],
+  "text_colours": {
+   "#1A1A1A": 22
+  },
+  "audit_figure_collisions.py": {
+   "exit": 0,
+   "out": [
+    "Nature Figure Rendered Collision Audit",
+    "pdf: D:\\desk\\llm\\ch4\\tools\\nature\\figs\\fig-app.pdf",
+    "pages: 1",
+    "visible text boxes: 18",
+    "stroke paths: 28",
+    "",
+    "",
+    "summary: 0 fail, 0 warn, 20 contained fill overlays, 0 contained image overlays",
+    "verdict: PASS",
+    "note: contained overlays can be intentional; WARN findings need final-size visual review"
+   ]
+  },
+  "audit_pdf_text.py": {
+   "exit": 0,
+   "out": [
+    "Nature Figure PDF Text Audit",
+    "pdf: D:\\desk\\llm\\ch4\\tools\\nature\\figs\\fig-app.pdf",
+    "minimum required: 5 pt",
+    "minimum found: 7.472 pt",
+    "text runs: 17",
+    "below minimum: 0",
+    "verdict: PASS",
+    "note: content-stream scanning does not replace final-size visual inspection or account for every PDF transform (e.g. Form XObject matrices)"
+   ]
+  }
+ },
+ "fig-case": {
+  "width_mm": 114.5,
+  "center_offset_mm": -0.9,
+  "sizes_pt": {
+   "7.5": 41,
+   "9.0": 5
+  },
+  "fonts": {
+   "SimHei": 2,
+   "SimSun": 22,
+   "TeXGyreTermes-Regular": 22
+  },
+  "bold_text": [],
+  "text_colours": {
+   "#1A1A1A": 46
+  },
+  "audit_figure_collisions.py": {
+   "exit": 1,
+   "out": [
+    "Nature Figure Rendered Collision Audit",
+    "pdf: D:\\desk\\llm\\ch4\\tools\\nature\\figs\\fig-case.pdf",
+    "pages: 1",
+    "visible text boxes: 21",
+    "stroke paths: 33",
+    "",
+    "[FAIL] page 1 text-text: Text boxes overlap by 100.0% of the smaller box — '实测'",
+    "  other text: '验证'",
+    "  text bbox: (15.787399291992188, 121.91703033447266, 30.731399536132812, 139.35202026367188)",
+    "[FAIL] page 1 text-text: Text boxes overlap by 58.6% of the smaller box — '4位权重约5GB'",
+    "  other text: 'KV缓存每请求约0.5GiB'",
+    "  text bbox: (190.50238037109375, 141.6290283203125, 245.70916748046875, 159.63189697265625)",
+    "[FAIL] page 1 text-text: Text boxes overlap by 100.0% of the smaller box — '200名学生，高峰30路并发'",
+    "  other text: '回答注明出处，数据不外传'",
+    "  text bbox: (190.5023956298828, 22.589017868041992, 283.9013671875, 40.02401351928711)",
+    "[FAIL] page 1 text-text: Text boxes overlap by 68.4% of the smaller box — '单张24GB显卡'",
+    "  other text: '显存带宽约1TB/s'",
+    "  text bbox: (190.5023956298828, 181.343017578125, 245.71139526367188, 198.77801513671875)",
+    "",
+    "summary: 4 fail, 0 warn, 17 contained fill overlays, 0 contained image overlays",
+    "verdict: FIX BEFORE DELIVERY",
+    "note: contained overlays can be intentional; WARN findings need final-size visual review"
+   ]
+  },
+  "audit_pdf_text.py": {
+   "exit": 0,
+   "out": [
+    "Nature Figure PDF Text Audit",
+    "pdf: D:\\desk\\llm\\ch4\\tools\\nature\\figs\\fig-case.pdf",
+    "minimum required: 5 pt",
+    "minimum found: 7.472 pt",
+    "text runs: 30",
+    "below minimum: 0",
+    "verdict: PASS",
+    "note: content-stream scanning does not replace final-size visual inspection or account for every PDF transform (e.g. Form XObject matrices)"
+   ]
+  }
+ }
+}

@@ -1,0 +1,27 @@
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[fig, x=1mm, y=1mm]
+  \foreach \i/\t/\c in {
+      0/业务需求/{200 名学生，高峰 30 路并发；回答需注明出处；数据不外传},
+      1/服务指标/{P95 TTFT $\le$ 2 s；输出 $\ge$ 15 token/s；引用可核对},
+      2/模型与推理引擎/{RAG 工作流 + 8B 开源模型；vLLM 类推理引擎},
+      3/显存与带宽估算/{4 位权重约 5 GB；KV 缓存每请求约 0.5 GiB},
+      4/硬件与网络/{单张 24 GB 显卡，带宽约 1 TB/s}} {
+    \ifnum\i=3
+      \node[blka, minimum width=34mm, minimum height=8.5mm] (s\i) at (-36,-\i*13) {\t};
+    \else
+      \node[blk, minimum width=34mm, minimum height=8.5mm] (s\i) at (-36,-\i*13) {\t};
+    \fi
+    \node[note, anchor=west, text width=66mm, align=left, font=\figfont\footnotesize] at (-14,-\i*13) {\c};
+  }
+  \foreach \i [evaluate=\i as \j using int(\i+1)] in {0,...,3}
+    \draw[flow] (s\i.south) -- (s\j.north);
+  % 实测反馈
+  \node[blkw, minimum width=20mm, minimum height=8.5mm, font=\figfont\small] (m) at (-72,-26) {实测验证};
+  \draw[->, dashed, line width=0.6pt] (s4.west) -| (m.south);
+  \draw[->, dashed, line width=0.6pt] (m.north) |- (s1.west);
+  \node[note, font=\figfont\scriptsize, anchor=north] at (-36,-59) {设计方向：自上而下\quad 虚线：用测量结果修正指标与方案};
+\end{tikzpicture}
+\caption{自上而下的系统设计流程及其在课程知识问答助手中的取值。高亮的估算环节决定了方案能否成立}
+\label{fig:case-flow}
+\end{figure}

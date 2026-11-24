@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>第 4 章数据图样张（Lieflat 风格）</title>
+<!--
+  Built from lieflat-charts (https://github.com/larashero3-dotcom/lieflat-charts), PolyForm Noncommercial 1.0.0.
+  Templates used (templates/basics-gallery.html):
+    F1 Rung Bars   — "B1 · rung bars"     → 图 A
+    F7 Stacked Rungs — "C3 · stacked rungs" → 图 B
+    F2 Hairline Line — "B2 · hairline line" → 图 C
+  Custom palette (user's book palette): BG white, ink #1A1A1A, one HERO = book accent #2E7D78.
+-->
+<style>
+  :root{--bg:#FFFFFF;--ink:#1A1A1A;--muted:#6E6E6A;--faint:#A9A8A2;--grid:#DEDDD6}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);font-family:'Inter','Microsoft YaHei','PingFang SC',sans-serif;color:var(--ink);padding:32px 16px;-webkit-font-smoothing:antialiased}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:22px;max-width:1100px;margin:0 auto}
+  @media (max-width:760px){.grid2{grid-template-columns:1fr}}
+  .card{background:var(--bg);border-radius:24px;padding:24px 24px 18px}
+  .card.wide{grid-column:1/-1}
+  h2{font-weight:700;font-size:16px;letter-spacing:-.01em;margin-bottom:4px}
+  .sub{font-size:11.5px;color:var(--muted);margin-bottom:12px;line-height:1.6}
+  .src{font-size:9.5px;color:var(--faint);margin-top:8px;letter-spacing:.08em;font-weight:500}
+  svg{width:100%;max-height:340px;display:block;margin:0 auto}
+  svg text{font-family:'Inter','Microsoft YaHei',sans-serif}
+  .pop{transform-box:fill-box;transform-origin:center;animation:pop .5s cubic-bezier(.2,.7,.3,1.3) both}
+  @keyframes pop{from{transform:scale(0)}to{transform:none}}
+  .fade{animation:fade .9s ease both}
+  @keyframes fade{from{opacity:0}}
+  .draw{stroke-dasharray:1;stroke-dashoffset:1;animation:draw 1s cubic-bezier(.4,0,.2,1) both}
+  @keyframes draw{to{stroke-dashoffset:0}}
+  @media (prefers-reduced-motion:reduce){.pop,.fade,.draw{animation:none!important;stroke-dasharray:none;stroke-dashoffset:0}}
+  .print .pop,.print .fade,.print .draw{animation:none!important;stroke-dasharray:none;stroke-dashoffset:0}
+</style>
+</head>
+<body>
+<div class="grid2">
+  <div class="card">
+    <h2>精度每减半，7B 模型的权重就小一半</h2>
+    <div class="sub">7B 模型仅权重所需显存 · 一档 = 1 GB · 末档按比例截短 · 虚线为 24 GB 消费级显卡</div>
+    <svg id="rungs" viewBox="0 0 400 320" preserveAspectRatio="xMidYMid meet"></svg>
+    <div class="src">RUNG BARS · 式 (4-1) · N = 7×10⁹</div>
+  </div>
+  <div class="card">
+    <h2>ZeRO 切掉的主要是优化器状态</h2>
+    <div class="sub">7B 模型、8 卡数据并行时每卡显存 · 一档 = 2 GB · 深 = 参数 · 中 = 梯度 · 色 = 优化器状态 · 虚线为 80 GB 显卡</div>
+    <svg id="stackrungs" viewBox="0 0 400 320" preserveAspectRatio="xMidYMid meet"></svg>
+    <div class="src">STACKED RUNGS · 例 4-2 / 图 4-8 · 未计激活值</div>
+  </div>
+  <div class="card wide">
+    <h2>上下文变长 8 倍，单卡可同时服务的请求从 119 个降到约 15 个</h2>
+    <div class="sub">例 4-3 的 8B 模型 · 80 GB 显卡扣除 16 GB 权重后可容纳的请求数 · 一点 = 一种上下文长度（每 2K 一点）· 不计其他开销</div>
+    <svg id="dayline" viewBox="0 0 840 316" preserveAspectRatio="xMidYMid meet" style="max-height:316px"></svg>
+    <div class="src">HAIRLINE LINE · 式 (4-7) · 每 token 的 KV 缓存 = 128 KiB</div>
+  </div>
+</div>
+<script>
+// ── Mono tokens (from lieflat basics gallery) with the book's custom palette ──
+const INK='#1A1A1A',PAPER='#FFFFFF',MUTED='#6E6E6A',GRID='#DEDDD6',HERO='#2E7D78';
+const NS='http://www.w3.org/2000/svg';
+const el=(p,t,a)=>{const n=document.createElementNS(NS,t);for(const k in a)n.setAttribute(k,a[k]);p.appendChild(n);return n};
+const txt=(p,a,s)=>{const n=el(p,'text',a);n.textContent=s;return n};
+const tip=(n,s)=>{const t=document.createElementNS(NS,'title');t.textContent=s;n.appendChild(t)};
+const rnd=(i,k)=>Math.abs(((i*73856093)^(k*19349663))%1000)/1000;
+const obsReveal=(id,fn)=>{
+  const n=document.getElementById(id);
+  const go=()=>{n.innerHTML='';fn(n)};
+  if(document.body.classList.contains('print')){go();return}
+  const io=new IntersectionObserver(es=>{if(es[0].isIntersecting){go();io.disconnect()}},{threshold:.3});
+  io.observe(n);
+  n.style.cursor='pointer';
+  n.addEventListener('click',go);
+};
+if(location.hash==='#print')document.body.classList.add('print');
+
+// ════ 图 A · F1 rung bars ════  一档 = 1 GB
+(()=>{
+const D=[['FP32',28],['FP16 / BF16',14],['INT8',7],['INT4',3.5]];
+obsReveal('rungs',s=>{
+  const x0=i=>80+i*80,base=266,step=7,HW=18;
+  // 24 GB 参考线（家具）
+  const yRef=base-24*step+step/2;
+  el(s,'line',{x1:40,y1:yRef,x2:372,y2:yRef,stroke:MUTED,'stroke-width':.8,'stroke-dasharray':'3 3',class:'fade'});
+  txt(s,{x:372,y:yRef-5,'font-size':8,'font-weight':600,fill:MUTED,'text-anchor':'end',class:'fade'},'24 GB 显卡');
+  D.forEach(([name,v],i)=>{
+    const x=x0(i),hero=i===3,col=hero?HERO:INK;
+    const full=Math.floor(v),part=v-full;
+    for(let k=0;k<Math.ceil(v);k++){
+      const y=base-k*step,frac=(k===full&&part>0)?part:1;
+      const w=(HW-1.5+rnd(k+1,i+2)*3)*frac;
+      el(s,'line',{x1:x-w,y1:y,x2:x+w,y2:y,stroke:col,'stroke-width':1.2,
+        opacity:.55+rnd(k+2,i+4)*.45,class:'fade',style:`animation-delay:${i*.08+k*.012}s`});
+      if(k%5===4)el(s,'circle',{cx:x+HW+5,cy:y,r:.9,fill:'#C6C5BF',class:'fade'});
+    }
+    const topY=base-(Math.ceil(v)-1)*step;
+    const num=txt(s,{x,y:topY-10,'font-size':11,'font-weight':800,fill:col,'text-anchor':'middle',
+      class:'fade',style:`animation-delay:${.4+i*.08}s`},v+' GB');
+    tip(num,`${name}：${v} GB`);
+    txt(s,{x,y:base+18,'font-size':8.5,'font-weight':700,fill:MUTED,'text-anchor':'middle',
+      'letter-spacing':'.04em',class:'fade'},name);
+  });
+  el(s,'line',{x1:36,y1:base+4,x2:372,y2:base+4,stroke:GRID,'stroke-width':.8,class:'fade'});
+  txt(s,{x:200,y:310,'font-size':7.5,'font-weight':600,fill:'#A9A8A2','text-anchor':'middle',
+    'letter-spacing':'.1em',class:'fade'},'一档 = 1 GB · 圆点每 5 档一个');
+});
+})();
+
+// ════ 图 B · F7 stacked rungs ════  一档 = 2 GB，段：参数 / 梯度 / 优化器状态
+(()=>{
+const U=2;
+const D=[['数据并行',[14,14,84]],['ZeRO-1',[14,14,10.5]],['ZeRO-2',[14,1.75,10.5]],['ZeRO-3',[1.75,1.75,10.5]]];
+const SHADE=[INK,'#9A9993',HERO];
+const SEG=['参数','梯度','优化器状态'];
+obsReveal('stackrungs',s=>{
+  const x0=i=>78+i*78,base=272,step=3.7,HW=15;
+  const yOf=gb=>base-(gb/U)*step;
+  const yRef=yOf(80);
+  el(s,'line',{x1:40,y1:yRef,x2:372,y2:yRef,stroke:MUTED,'stroke-width':.8,'stroke-dasharray':'3 3',class:'fade'});
+  txt(s,{x:372,y:yRef-5,'font-size':8,'font-weight':600,fill:MUTED,'text-anchor':'end',class:'fade'},'80 GB 显卡');
+  D.forEach(([name,segs],i)=>{
+    const x=x0(i);let acc=0;
+    segs.forEach((gb,si)=>{
+      const n=gb/U,full=Math.floor(n+1e-9),part=n-full;
+      for(let k=0;k<Math.ceil(n-1e-9);k++){
+        const y=yOf(acc)-(k)*step-si*step*0.6,frac=(k===full&&part>0)?part:1;
+        const w=(HW-1.4+rnd(k+1,i*3+si+2)*2.8)*frac;
+        el(s,'line',{x1:x-w,y1:y,x2:x+w,y2:y,stroke:SHADE[si],'stroke-width':1,
+          opacity:.6+rnd(k+2,i+si+4)*.4,class:'fade',style:`animation-delay:${i*.09+k*.01}s`});
+      }
+      if(gb>=8){
+        const midY=yOf(acc+gb/2)-si*step*0.6;
+        const lab=txt(s,{x:x+HW+6,y:midY+3,'font-size':8,'font-weight':800,fill:si===1?MUTED:SHADE[si],class:'fade'},gb);
+        tip(lab,`${name} ${SEG[si]}：${gb} GB`);
+      }
+      acc+=gb;
+    });
+    const total=segs.reduce((a,b)=>a+b,0);
+    txt(s,{x,y:yOf(total)-3*step-8,'font-size':10.5,'font-weight':800,fill:INK,'text-anchor':'middle',class:'fade'},
+      (Math.round(total*10)/10)+' GB');
+    txt(s,{x,y:base+18,'font-size':8.5,'font-weight':700,fill:MUTED,'text-anchor':'middle','letter-spacing':'.04em',class:'fade'},name);
+  });
+  el(s,'line',{x1:36,y1:base+4,x2:372,y2:base+4,stroke:GRID,'stroke-width':.8,class:'fade'});
+  txt(s,{x:200,y:312,'font-size':7.5,'font-weight':600,fill:'#A9A8A2','text-anchor':'middle','letter-spacing':'.1em',class:'fade'},
+    '深 = 参数 · 中 = 梯度 · 色 = 优化器状态 · 一档 = 2 GB');
+});
+})();
+
+// ════ 图 C · F2 hairline line ════  一点 = 一种上下文长度
+(()=>{
+const FREE=64e9, PER_TOK=2*32*8*128*2;            // 字节；式 (4-7)，GQA 8 头、BF16
+const T=Array.from({length:16},(_,i)=>(i+1)*2048);
+const V=T.map(t=>Math.round(FREE/(t*PER_TOK)));
+obsReveal('dayline',s=>{
+  const x=i=>70+i*46,base=250,map=v=>base-v*0.92;
+  // 地板：每 1K token 一根刻度（家具）
+  for(let k=0;k<=32;k++){const xx=70+(k/2-1)*46;if(xx<46)continue;
+    el(s,'line',{x1:xx,y1:base,x2:xx,y2:base-(k%4===0?9:5),stroke:'#CFCEC7','stroke-width':.6,class:'fade'});}
+  el(s,'line',{x1:46,y1:base,x2:790,y2:base,stroke:GRID,'stroke-width':.8,class:'fade'});
+  const pts=V.map((v,i)=>`${x(i)} ${map(v)}`).join(' L ');
+  el(s,'path',{d:'M'+pts,fill:'none',stroke:INK,'stroke-width':1,pathLength:1,class:'draw',style:'animation-duration:1.2s'});
+  V.forEach((v,i)=>{
+    const t=T[i],hero=t===4096,mark=hero||t===32768||t===2048;
+    const dot=el(s,'circle',{cx:x(i),cy:map(v),r:mark?4.2:2.1,fill:hero?HERO:INK,class:'pop',style:`animation-delay:${.2+i*.04}s`});
+    tip(dot,`${t/1024}K token：约 ${v} 个请求`);
+    if(mark)txt(s,{x:x(i)+(t===2048?-2:0),y:map(v)-11,'font-size':10,'font-weight':800,fill:hero?HERO:INK,'text-anchor':'middle',
+      style:`paint-order:stroke;stroke:${PAPER};stroke-width:3px`,class:'fade'},
+      t===4096?`${v}（例 4-3）`:v);
+  });
+  [2,4,8,16,32].forEach(k=>txt(s,{x:x(k/2-1),y:base+18,'font-size':8.5,'font-weight':600,fill:MUTED,'text-anchor':'middle','letter-spacing':'.06em',class:'fade'},k+'K'));
+  txt(s,{x:790,y:base+34,'font-size':8.5,'font-weight':600,fill:MUTED,'text-anchor':'end',class:'fade'},'上下文长度 / token');
+  txt(s,{x:420,y:306,'font-size':7.5,'font-weight':600,fill:'#A9A8A2','text-anchor':'middle','letter-spacing':'.1em',class:'fade'},
+    '一点 = 一种上下文长度 · 底部刻度每 1K token 一根 · 纵轴为可同时容纳的请求数');
+});
+})();
+</script>
+</body>
+</html>

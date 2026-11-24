@@ -1,0 +1,48 @@
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[fig, x=1mm, y=1mm]
+  \tikzset{lay/.style={draw=figline, fill=figfill, minimum width=14mm, minimum height=4.2mm, inner sep=0pt, font=\figfont\scriptsize},
+           half/.style={draw=accent, fill=accentpale, minimum width=6.6mm, minimum height=4.2mm, inner sep=0pt, font=\figfont\scriptsize},
+           dev/.style={draw=rulegray, rounded corners=1.5pt, minimum width=18mm, minimum height=30mm}}
+  % ---------- (a) 数据并行 ----------
+  \begin{scope}[shift={(-50,0)}]
+    \foreach \g in {0,1} {
+      \node[dev] (d\g) at (\g*21-10.5,0) {};
+      \node[font=\figfont\scriptsize, anchor=south] at (d\g.north) {GPU\,\the\numexpr\g+1\relax};
+      \foreach \l in {1,...,4} \node[lay] at (\g*21-10.5, 9-\l*5.5) {第\,\l\,层};
+      \node[blkw, minimum height=4mm, minimum width=12mm, inner sep=0pt, font=\figfont\scriptsize] at (\g*21-10.5,-12.5) {数据 \the\numexpr\g+1\relax};
+    }
+    \draw[<->, accent, line width=0.9pt] (-1.6,-1) -- (1.6,-1);
+    \node[note, font=\figfont\scriptsize, text=accent] at (0,-21) {梯度 All-Reduce};
+    \node[font=\figfont\small, anchor=north] at (0,-25) {(a) 数据并行：复制模型};
+  \end{scope}
+  % ---------- (b) 张量并行 ----------
+  \begin{scope}[shift={(0,0)}]
+    \node[dev, minimum width=36mm] (tp) at (0,0) {};
+    \node[font=\figfont\scriptsize, anchor=south] at (tp.north) {GPU\,1 \quad\ \ GPU\,2};
+    \foreach \l in {1,...,4} {
+      \node[half] at (-4.2, 9-\l*5.5) {\l\,a};
+      \node[half] at ( 4.2, 9-\l*5.5) {\l\,b};
+      \draw[<->, warn, line width=0.6pt] (-0.7, 9-\l*5.5) -- (0.7, 9-\l*5.5);
+    }
+    \draw[dashed, rulegray] (0,14) -- (0,-14);
+    \node[blkw, minimum height=4mm, minimum width=20mm, inner sep=0pt, font=\figfont\scriptsize] at (0,-12.5) {同一批数据};
+    \node[note, font=\figfont\scriptsize, text=warn] at (0,-21) {每层都要交换结果};
+    \node[font=\figfont\small, anchor=north] at (0,-25) {(b) 张量并行：切分层内矩阵};
+  \end{scope}
+  % ---------- (c) 流水线并行 ----------
+  \begin{scope}[shift={(50,0)}]
+    \foreach \g in {0,1} {
+      \node[dev] (p\g) at (\g*21-10.5,0) {};
+      \node[font=\figfont\scriptsize, anchor=south] at (p\g.north) {GPU\,\the\numexpr\g+1\relax};
+    }
+    \foreach \l/\x/\y in {1/-10.5/3.5, 2/-10.5/-2, 3/10.5/3.5, 4/10.5/-2}
+      \node[lay] at (\x,\y) {第\,\l\,层};
+    \draw[->, accent, line width=0.9pt] (-3,-2) -- (3,3.5);
+    \node[note, font=\figfont\scriptsize, text=accent] at (0,-21) {阶段间传递激活};
+    \node[font=\figfont\small, anchor=north] at (0,-25) {(c) 流水线并行：按层切分};
+  \end{scope}
+\end{tikzpicture}
+\caption{三种基本并行方式的切分对象（以 2 张 GPU、4 层模型为例）。红色箭头表示频繁通信，应放在高带宽链路上}
+\label{fig:parallel}
+\end{figure}

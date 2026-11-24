@@ -1,0 +1,72 @@
+\documentclass[UTF8,fontset=none,zihao=5,twoside,openany]{ctexbook}
+\usepackage{bookstyle}
+\usepackage{float}
+\let\oldfigure\figure \let\endoldfigure\endfigure
+\renewenvironment{figure}[1][]{\oldfigure[H]}{\endoldfigure}
+\renewcommand{\cite}[1]{}
+\setcounter{chapter}{4}
+\pagestyle{plain}
+\begin{document}
+
+\section*{样张一：图 4-6 第二稿（按 nature-figure 示意图规范重画）}
+\textbf{本稿遵守的规则：}
+\begin{enumerate}
+  \item 字体统一：全图一种字族、两种字号。层名用小四号加粗（全图唯一加粗处），说明与工具一律用同一号常规字体；所有文字同一深色。
+  \item 结构统一：每个框内部顺序相同——层名、一行说明、底部色带写“工具：……”。工具类别因此永远出现在所属框的同一位置，不再有“向量数据库在左下、部署工具在右下”这类不一致。
+  \item 尺寸统一：同一行的框等宽、等间距、上下边对齐；整幅图以正文栏中线为轴。
+  \item 连线规范：连线标签与其他文字保持间距；虚线只表示一种含义（离线）。
+  \item 颜色规范：唯一强调色只用于本图要表达的信息——工具类别色带；不再另用图例，色带含义写在图注里。
+\end{enumerate}
+
+\Needspace{80mm}\noindent\textbf{修改前（第一稿）}
+\input{samples/s3-app}
+\Needspace{80mm}\noindent\textbf{修改后（第二稿）}
+\input{samples/s4-app}
+
+\clearpage
+\section*{样张二：问题驱动的行文（以 4.2.1--4.2.3 为例）}
+\textbf{参照的写法。}系统类经典教材（如 Hennessy 与 Patterson 的《计算机体系结构：量化研究方法》、Bryant 与 O'Hallaron 的《深入理解计算机系统》、Kleppmann 的《数据密集型应用系统设计》）都是问题驱动的，但它们不在每段前贴“需求 / 方案 / 效果”标签，而是把这条线索藏在行文里：
+\begin{itemize}
+  \item \textbf{用问题开头}：小节从一个具体数字、一个前文留下的结论或一个读者会自然产生的疑问开始，标题本身也常是问题（“为什么是 GPU？”）。
+  \item \textbf{用过渡句代替标签}：“问题在于……”“沿着这个方向再往前走……”“代价是什么？”“这样看来……”。
+  \item \textbf{每小节的形状不必相同}：有的先给反例，有的先给数字，有的直接比较；避免每节都是同一个模板。
+  \item \textbf{收尾落在可迁移的规律上}，而不是“效果是……”。例如“通信越频繁的工作，越应该放在越近的地方”。
+\end{itemize}
+保留的部分：章的整体顺序（4.1 需求 → 4.2--4.5 方案 → 4.6 案例）、每节开头的导引框、例题与“辨析”框。删去的只是小节内部的加粗标签。
+
+\medskip
+\noindent\textbf{修改前（节选，现稿 4.2.1 开头）}
+
+\begin{quote}\small
+\textbf{需求}\quad Transformer 的绝大部分计算是矩阵乘法：注意力中的投影、注意力分数与加权求和，以及前馈网络中的两次线性变换。矩阵乘法规则统一，包含大量彼此独立的乘加运算，最适合由大量简单计算单元同时执行。因此，大模型需要的是高并行吞吐，而不是单个任务的低延迟。
+
+\textbf{方案}\quad 不同芯片在“通用性”与“专用效率”之间做出不同取舍（图 4-3）。……
+
+\textbf{效果与代价}\quad 专用化换来了更高的吞吐与能效，代价是通用性下降、软件生态绑定加深。……
+\end{quote}
+
+\noindent\textbf{修改后}
+
+\input{samples/s5-text}
+
+\clearpage
+\section*{样张三：用 Lieflat Charts 风格画数据图}
+以下三张图由 lieflat-charts 的 Basics 模板生成（F1 Rung Bars、F7 Stacked Rungs、F2 Hairline Line），配色改为本书的白底、深色文字和同一个强调色，字体用本书图中的微软雅黑。原件是可交互的 HTML（悬停显示数值、滚入时有入场动画），这里放的是截图。
+
+它的特点是“一档 = 一个可数单位”：柱子由一根根横档组成，读者可以数出 28 GB 就是 28 档。标题直接写结论而不是图名，副标题写清单位和图例。
+
+\begin{figure}[H]\centering
+\includegraphics[width=0.49\linewidth]{samples/lf-a.png}\hfill
+\includegraphics[width=0.49\linewidth]{samples/lf-b.png}
+\caption{（样图）左：不同精度下 7B 模型的权重大小；右：ZeRO 各阶段的每卡显存（对应现稿图 4-8）}
+\end{figure}
+
+\begin{figure}[H]\centering
+\includegraphics[width=\linewidth]{samples/lf-c.png}
+\caption{（样图）上下文长度与单卡可容纳请求数（对应例 4-3）}
+\end{figure}
+
+\Needspace{70mm}\noindent\textbf{对照：现稿中用 TikZ / pgfplots 画的同一组数据（图 4-8）}
+\input{figs/fig-zero}
+
+\end{document}

@@ -1,0 +1,24 @@
+# 第三方仓库克隆
+external/
+# 临时与构建中间件
+upload_tmp/
+*.zip
+*.log
+*.aux
+*.out
+*.toc
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+node_modules/
+.venv/
+__pycache__/
+.quarto/
+# 本机环境与密钥
+.env
+.env.*
+*.pem
+*.key
+.omx/
+.omc/
+.claude/settings.local.json

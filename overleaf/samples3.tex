@@ -1,0 +1,46 @@
+\documentclass[UTF8,fontset=none,zihao=5,twoside,openany]{ctexbook}
+\usepackage{bookstyle}
+\usepackage{float}
+\let\oldfigure\figure \let\endoldfigure\endfigure
+\renewenvironment{figure}[1][]{\oldfigure[H]}{\endoldfigure}
+\renewcommand{\cite}[1]{}
+\setcounter{chapter}{4}
+\pagestyle{plain}
+% 变体 2：只换字体——图中文字改用正文字体（中文宋体、西文 Times），字号两级 9 / 7.5 pt
+\newcommand{\fontbook}{%
+  \renewcommand{\figfont}{\rmfamily}%
+  \renewcommand{\figsizes}{\def\baselinestretch{1}%
+    \renewcommand{\normalsize}{\fontsize{9}{12}\selectfont}%
+    \renewcommand{\small}{\fontsize{9}{12}\selectfont}%
+    \renewcommand{\footnotesize}{\fontsize{7.5}{10}\selectfont}%
+    \renewcommand{\scriptsize}{\fontsize{7.5}{10}\selectfont}%
+    \renewcommand{\tiny}{\fontsize{7.5}{10}\selectfont}}}
+% 变体 3：再去掉颜色与圆角——只用黑、灰两种墨色
+\newcommand{\monobook}{%
+  \colorlet{accent}{black}\colorlet{accentpale}{black!12}\colorlet{warn}{black}%
+  \colorlet{figfill}{black!6}\colorlet{figline}{black}\colorlet{rulegray}{black!55}\colorlet{ink}{black}}
+\begin{document}
+
+\section*{样张三：“AI 味”从哪里来——三个版本对比}
+同一张图做三个版本，每次只改一处，便于判断是哪一个因素在起作用：
+\begin{enumerate}
+  \item \textbf{现行版}：微软雅黑、青绿强调色、圆角框（已修正间距）；
+  \item \textbf{只换字体}：图中文字改为与正文相同的宋体 + Times，其余不变；
+  \item \textbf{字体 + 配色 + 直角}：在 2 的基础上去掉彩色，只用黑与灰，框改为直角。
+\end{enumerate}
+
+\Needspace{70mm}\setcounter{figure}{2}\noindent\textbf{图 4-3\quad 版本 1：现行版}
+\input{figs/fig-chips}
+\Needspace{70mm}\setcounter{figure}{2}\noindent\textbf{图 4-3\quad 版本 2：只换字体}
+{\fontbook\input{figs/fig-chips}}
+\Needspace{70mm}\setcounter{figure}{2}\noindent\textbf{图 4-3\quad 版本 3：字体 + 黑灰 + 直角}
+{\fontbook\monobook\input{samples/s6-chips-sq}}
+
+\clearpage
+\Needspace{70mm}\setcounter{figure}{6}\noindent\textbf{图 4-7\quad 版本 1：现行版}
+\input{figs/fig-parallel}
+\Needspace{70mm}\setcounter{figure}{6}\noindent\textbf{图 4-7\quad 版本 2：只换字体}
+{\fontbook\input{figs/fig-parallel}}
+\Needspace{70mm}\setcounter{figure}{6}\noindent\textbf{图 4-7\quad 版本 3：字体 + 黑灰 + 直角}
+{\fontbook\monobook\input{samples/s6-par-sq}}
+\end{document}
